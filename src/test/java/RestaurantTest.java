@@ -30,6 +30,7 @@ class RestaurantTest {
     public void is_restaurant_open_should_return_true_if_time_is_between_opening_and_closing_time(){
         //WRITE UNIT TEST CASE HERE
         restaurantCreate();
+        restaurant.setOpeningTime(LocalTime.now().minusMinutes(10));
         restaurant.setClosingTime(LocalTime.now().plusMinutes(10));
         assertTrue(restaurant.isRestaurantOpen());
     }
@@ -39,6 +40,7 @@ class RestaurantTest {
         //WRITE UNIT TEST CASE HERE
         restaurantCreate();
         restaurant.setClosingTime(LocalTime.now().minusMinutes(10));
+        restaurant.setOpeningTime(LocalTime.now().plusMinutes(10));
         assertFalse(restaurant.isRestaurantOpen());
 
     }
@@ -46,22 +48,6 @@ class RestaurantTest {
     //<<<<<<<<<<<<<<<<<<<<<<<<<OPEN/CLOSED>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<Order value>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    @Test
-    public void order_value_should_get_cumulative_total_when_collection_of_item_selected(){
-        restaurantCreate();
-        dummy = restaurant.getMenu();
-        assertEquals(506,restaurant.getOrderValue(dummy));
-    }
-
-    @Test
-    public void order_value_should_reduce_cumulative_total_when_an_item_removed(){
-        restaurantCreate();
-        dummy=restaurant.getMenu();
-        int total = restaurant.getOrderValue(dummy);
-        int afterTotal = dummy.get(1).getPrice();
-        dummy.remove(1);
-        assertEquals(total-afterTotal,restaurant.getOrderValue(dummy));
-    }
     //<<<<<<<<<<<<<<<<<<<<<<<<<Order value>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     
