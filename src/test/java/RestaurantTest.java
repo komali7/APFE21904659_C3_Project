@@ -48,6 +48,24 @@ class RestaurantTest {
     //<<<<<<<<<<<<<<<<<<<<<<<<<OPEN/CLOSED>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<Order value>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @Test
+    public void order_value_should_get_cumulative_total_when_collection_of_item_selected(){
+        restaurantCreate();
+        dummy = restaurant.getMenu();
+        assertEquals(506,restaurant.getOrderValue(dummy));
+    }
+
+    @Test
+    public void order_value_should_reduce_cumulative_total_when_an_item_removed(){
+        restaurantCreate();
+        dummy=restaurant.getMenu();
+        int total = restaurant.getOrderValue(dummy);
+        int afterTotal = dummy.get(1).getPrice();
+        dummy.remove(1);
+        assertEquals(total-afterTotal,restaurant.getOrderValue(dummy));
+    }
+
+
     //<<<<<<<<<<<<<<<<<<<<<<<<<Order value>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     
